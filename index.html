@@ -134,8 +134,8 @@
 			<p>{{calculateData(2)}} volt (berdasarkan proses perhitungan RPM)</p>	
 			<p>Lama Charging : {{calculateDuration(1)}} jam</p>
 			<p>Lama Discharging : {{calculateOutput(1)}} jam</p>
-			<p v-if="calculateDuration(1) < calculateOutput(1)">Efektif (Lama Charging < Lama Discharging</p>
-			<p v-if="calculateDuration(1) > calculateOutput(1)"> Tidak Efektif (Lama Charging > Lama Discharging</p>
+			<p v-if="calculateDuration(1) < calculateOutput(1)">Efektif (Lama Charging < Lama Discharging)</p>
+			<p v-if="calculateDuration(1) > calculateOutput(1)"> Tidak Efektif (Lama Charging > Lama Discharging)</p>
 		</div>
 
 	</div>

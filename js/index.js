@@ -24,7 +24,7 @@ var data = new Vue({
 
 		output_data : {
 			arus : '',
-			output_qty : 1
+			btry_qty : 1
 		}
 
 	},
