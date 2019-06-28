@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simulation</title>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+
+	<div id="app">
+		
+		<div class="header">
+			<h1>Simulasi Perhitungan Daya Listrik</h1>	
+			<p>Turbin Angin | <b>Universitas Katolik De La Salle Manado</b></p>
+		</div>
+
+		<!-- TEST DATA -->
+		<div style="display: flex;">
+			
+			<!-- NILAI KONSTANT -->
+			<div>
+
+	 			<p style="margin-bottom: 0px;margin-top: 40px;font-weight: bold;">Nilai Konstan</p>		
+
+				<div style="display: flex;">
+
+					<div style="margin-right: 10px;">
+						<p>Kecepatan Maks Angin (ka)</p>
+						<p>Tegangan Maksimal (tm)</p>
+						<p>RPM (rpm)</p>
+						<p>Nilai "Mapping" (nM)</p>
+					</div>
+
+					<div>
+						<p> : {{ws_peak}} knot</p>
+						<p> : {{pw_peak}} volt</p>
+						<p> : {{wind_rpm}} rpm</p>
+						<p> : {{pw_peak/ws_peak}} <b>(ka/tm)</b></p>
+					</div>
+						
+				</div></div>
+
+			<!-- SPESIFIKASI MOTOR -->
+			<div style="margin-left: 90px;">
+
+				<p style="margin-bottom: 0px;margin-top: 40px;font-weight: bold;">Spesifikasi Motor</p>		
+				
+				<div style="display: flex;">
+
+					<div style="margin-right: 10px;">
+						<p>Tegangan Maks Motor</p>
+						<p>RPM Maks Motor</p>
+						<p>Arus Motor</p>
+						<p>Nilai "Mapping" (nM)</p>
+					</div>
+
+					<div>
+						<p> : {{motor_spec.volt}} volt</p>
+						<p> : {{motor_spec.rpm}} rpm</p>
+						<p> : {{motor_spec.amp}} mA</p>
+						<p> : {{(pw_peak * 100)/wind_rpm}} <b>(ka/tm)</b></p>
+					</div>
+						
+				</div></div>
+
+		</div>
+
+		<div>
+		
+			<!-- INPUT PERCOBAAN -->
+			<p style="font-weight: bold;margin-bottom: 0px;">Parameter Percobaan Dasar</p>
+			<div style="display: flex;">
+
+				<div style="margin-right: 20px;">
+					<p>Kecepatan Angin (knot)</p>
+					<input type="number" v-model="input_data.kec_angin">
+				</div>
+
+				<div style="margin-right: 20px;">
+					<p>RPM Angin (rpm)</p>
+					<input type="number" v-model="input_data.rpm_angin">
+				</div>
+
+				<div style="margin-right: 20px;">
+					<p>Kapasitas Penampung (mAh)</p>
+					<input type="number" v-model="input_data.btry">
+				</div>
+
+				<div style="margin-right: 20px;">
+					<p>Jumlah Pembangkit</p>
+					<input type="number" v-model="input_data.turbin">
+				</div>
+
+				<div style="margin-right: 20px;">
+					<p>Jumlah Penampung</p>
+					<input type="number" v-model="input_data.btry_qty">
+				</div>
+
+			</div>
+		
+		</div>
+
+		<div style="margin-top: 30px;">
+			
+			<p style="margin-bottom: 0px;font-weight: bold;">Parameter Percobaan Beban</p>
+			
+			<div style="display: flex;">
+				
+				<div style="margin-right: 20px;">
+					<p>Arus Input Beban (mA)</p>
+					<input type="number" v-model="output_data.arus">
+				</div>
+
+				<div style="margin-right: 20px;">
+					<p>Jumlah Beban</p>
+					<input type="number" v-model="output_data.btry_qty">
+				</div>
+
+			</div>
+			
+
+		</div>
+		
+		<!-- KONSTANTA -->
+		<div>
+						
+		</div>
+		
+		<!-- HASIL SIMULASI -->
+		<div style="margin-bottom: 60px;"	>
+			<p style="font-weight: bold;margin-top: 30px;">Hasil Simulasi</p>
+			<p>{{calculateData(1)}} volt (berdasarkan proses mapping)</p>
+			<p>{{calculateData(2)}} volt (berdasarkan proses perhitungan RPM)</p>	
+			<p>Lama Charging : {{calculateDuration(1)}} jam</p>
+			<p>Lama Discharging : {{calculateOutput(1)}} jam</p>
+			<p v-if="calculateDuration(1) < calculateOutput(1)">Efektif (Lama Charging < Lama Discharging</p>
+			<p v-if="calculateDuration(1) > calculateOutput(1)"> Tidak Efektif (Lama Charging > Lama Discharging</p>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="js/index.js"></script>
+
+</body>
+
+</html>
