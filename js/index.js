@@ -52,7 +52,7 @@ var data = new Vue({
 
 			//CHARGE TIME
 			if (index == 1) {
-				data = this.input_data.btry / ((10.4166666667 * this.input_data.turbin) * this.calculateData(1));				
+				data = (this.input_data.btry * this.input_data.btry_qty) / ((10.4166666667 * this.input_data.turbin) * this.calculateData(1));				
 			}
 
 			return data.toFixed(2);
